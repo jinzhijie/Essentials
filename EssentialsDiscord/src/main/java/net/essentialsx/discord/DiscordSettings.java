@@ -306,6 +306,11 @@ public class DiscordSettings implements IConf {
 
     @Override
     public void reloadConfig() {
+        if (plugin.isInvalidStartup()) {
+            plugin.getLogger().warning("Tried to reload EssentialsX Discord config while the plugin is in an invalid state!");
+            return;
+        }
+
         config.load();
 
         // Build channel maps
